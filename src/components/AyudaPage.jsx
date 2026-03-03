@@ -139,20 +139,6 @@ export default function AyudaPage({
         </section>
 
         {/* Contacto */}
-        <section className="bg-ml-blue py-12 text-center">
-          <div className="max-w-2xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-white mb-3">¿No encontraste lo que buscabas?</h2>
-            <p className="text-blue-100 mb-6">Nuestro equipo de soporte está disponible 24/7 para ayudarte</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="bg-ml-yellow text-gray-900 font-bold px-6 py-3 rounded-lg hover:brightness-95 transition">
-                💬 Chat en vivo
-              </button>
-              <button className="bg-white text-ml-blue font-bold px-6 py-3 rounded-lg hover:bg-gray-50 transition">
-                📧 Enviar email
-              </button>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer onCategorySelect={onCategorySelect} />
