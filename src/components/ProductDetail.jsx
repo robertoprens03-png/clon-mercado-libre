@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getProductDetails } from '../services/mlApi'
+import { Link } from 'react-router-dom'
+import { getProductDetails } from '../services/fakeStoreApi'
 
 export default function ProductDetail({ productId, onClose, onAddToCart }) {
   const [product, setProduct] = useState(null)
@@ -156,8 +157,8 @@ export default function ProductDetail({ productId, onClose, onAddToCart }) {
                 {formatPrice(product.price)}
               </div>
               
-              {/* Envío */}
-              {product.shipping?.free_shipping && (
+              {/* Envio */}
+              {product.freeShipping && (
                 <div className="text-ml-blue font-semibold flex items-center gap-2">
                   <span className="text-xl">✓</span> Envío gratis a todo el país
                 </div>
@@ -167,13 +168,13 @@ export default function ProductDetail({ productId, onClose, onAddToCart }) {
             {/* Disponibilidad */}
             <div className="text-sm text-gray-600">
               <p>
-                <span className="font-semibold">Stock disponible:</span> {product.available} unidades
+                <span className="font-semibold">Stock disponible:</span> {product.available || 'Disponible'}
               </p>
               <p>
-                <span className="font-semibold">Vendidos:</span> {product.soldQuantity} unidades
+                <span className="font-semibold">Vendidos:</span> {product.soldQuantity || 0} unidades
               </p>
               <p>
-                <span className="font-semibold">Condición:</span> {product.condition === 'new' ? 'Nuevo' : 'Usado'}
+                <span className="font-semibold">Condición:</span> {product.condition === 'used' ? 'Usado' : 'Nuevo'}
               </p>
             </div>
 
@@ -214,14 +215,13 @@ export default function ProductDetail({ productId, onClose, onAddToCart }) {
               >
                 Agregar al carrito
               </button>
-              <a
-                href={product.mlLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={`/producto/${product.id}`}
+                onClick={onClose}
                 className="flex-1 border-2 border-ml-blue text-ml-blue py-3 rounded font-bold hover:bg-ml-gray transition text-center"
               >
-                Ver en ML
-              </a>
+                Ver detalles
+              </Link>
             </div>
 
             {/* Descripción */}

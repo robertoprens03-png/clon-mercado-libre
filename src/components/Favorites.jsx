@@ -1,13 +1,6 @@
-import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Favorites({ favorites = [], onRemoveFavorite, onAddToCart, onViewDetails }) {
-  const [localFavorites, setLocalFavorites] = useState(favorites)
-
-  // Sincronizar con localStorage
-  useEffect(() => {
-    localStorage.setItem('ml_favorites', JSON.stringify(localFavorites))
-  }, [localFavorites])
-
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -17,11 +10,10 @@ export default function Favorites({ favorites = [], onRemoveFavorite, onAddToCar
   }
 
   const handleRemove = (productId) => {
-    setLocalFavorites(localFavorites.filter(p => p.id !== productId))
     onRemoveFavorite?.(productId)
   }
 
-  if (localFavorites.length === 0) {
+  if (favorites.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <div className="text-6xl mb-4">❤️</div>
@@ -37,7 +29,7 @@ export default function Favorites({ favorites = [], onRemoveFavorite, onAddToCar
       {/* Encabezado */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-ml-blue mb-2">
-          ❤️ Mis Favoritos ({localFavorites.length})
+          ❤️ Mis Favoritos ({favorites.length})
         </h2>
         <p className="text-gray-600">
           Productos guardados para más tarde
@@ -46,7 +38,7 @@ export default function Favorites({ favorites = [], onRemoveFavorite, onAddToCar
 
       {/* Grid de productos */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        {localFavorites.map((product) => (
+        {favorites.map((product) => (
           <div
             key={product.id}
             className="bg-white rounded-lg shadow-sm hover:shadow-lg transition overflow-hidden border-2 border-ml-yellow h-full flex flex-col relative"
@@ -146,12 +138,12 @@ export default function Favorites({ favorites = [], onRemoveFavorite, onAddToCar
 
       {/* Botón volver a comprar */}
       <div className="flex justify-center mt-8 pb-8">
-        <button
-          onClick={() => window.location.reload()}
+        <Link
+          to="/"
           className="px-6 py-3 bg-ml-blue text-ml-yellow font-bold rounded hover:bg-blue-900 transition"
         >
           ← Volver a Comprar
-        </button>
+        </Link>
       </div>
     </div>
   )

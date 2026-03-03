@@ -11,8 +11,6 @@ export default function ProductDetailPageWithLayout({
   cart = [],
   favorites = [],
   onCartClick = () => {},
-  onFavoritesClick = () => {},
-  onMyPurchasesClick = () => {},
   onAddToCart = () => {},
   onAddToFavorites = () => {},
   onCategorySelect = () => {}
@@ -29,8 +27,6 @@ export default function ProductDetailPageWithLayout({
         cartCount={cart.length}
         onCartClick={onCartClick}
         favoritesCount={favorites.length}
-        onFavoritesClick={onFavoritesClick}
-        onMyPurchasesClick={onMyPurchasesClick}
         onCategorySelect={onCategorySelect}
       />
 
@@ -43,7 +39,7 @@ export default function ProductDetailPageWithLayout({
         />
       </main>
 
-      <Footer />
+      <Footer onCategorySelect={onCategorySelect} />
     </div>
   )
 }

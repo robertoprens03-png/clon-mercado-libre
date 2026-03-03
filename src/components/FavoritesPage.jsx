@@ -1,9 +1,8 @@
 import Navbar from './Navbar'
 import Footer from './Footer'
-import ProductPreview from './ProductPreview'
+import Favorites from './Favorites'
 
-export default function PreviewPage({ 
-  products = [], 
+export default function FavoritesPage({
   favorites = [],
   cart = [],
   isLoggedIn = false,
@@ -11,11 +10,8 @@ export default function PreviewPage({
   onLoginClick = () => {},
   onLogoutClick = () => {},
   onCartClick = () => {},
+  onRemoveFavorite = () => {},
   onAddToCart = () => {},
-  onViewDetails = () => {},
-  onAddToFavorites = () => {},
-  onRemoveFromCart = () => {},
-  onRemoveFromFavorites = () => {},
   onCategorySelect = () => {}
 }) {
   return (
@@ -32,12 +28,11 @@ export default function PreviewPage({
       />
 
       <main className="flex-1">
-        <ProductPreview
-          products={products}
-          onAddToCart={onAddToCart}
-          onViewDetails={onViewDetails}
-          onAddToFavorites={onAddToFavorites}
+        <Favorites
           favorites={favorites}
+          onRemoveFavorite={onRemoveFavorite}
+          onAddToCart={onAddToCart}
+          onViewDetails={() => {}}
         />
       </main>
 

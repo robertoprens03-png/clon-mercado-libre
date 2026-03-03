@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import banner1 from '../img/banners/1.webp'
+import banner2 from '../img/banners/2.webp'
+import banner3 from '../img/banners/3.webp'
 
 export default function Banner() {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -6,15 +9,15 @@ export default function Banner() {
     const slides = [
         {
             id: 1,
-            image: '/src/img/banners/1.webp'
+            image: banner1,
         },
         {
             id: 2,
-            image: '/src/img/banners/2.webp'
+            image: banner2,
         },
         {
             id: 3,
-            image: '/src/img/banners/3.webp'
+            image: banner3,
         },
     ]
 
@@ -49,18 +52,9 @@ export default function Banner() {
                     >
                         <img
                             src={slide.image}
-                            alt={slide.title}
+                            alt={`Banner ${slide.id}`}
                             className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 flex flex-col justify-center items-start pl-16">
-                            <h2 className="text-white text-5xl font-bold mb-4 max-w-2xl">
-                                {slide.title}
-                            </h2>
-                            <p className="text-white text-2xl mb-6">{slide.subtitle}</p>
-                            <button className="bg-ml-yellow text-ml-blue px-8 py-3 rounded font-bold hover:bg-yellow-300 transition">
-                                {slide.button}
-                            </button>
-                        </div>
                     </div>
                 ))}
             </div>

@@ -5,10 +5,12 @@ import Footer from './Footer'
 export default function MyPurchasesPage({
   purchases = [],
   isLoggedIn = false,
+  cart = [],
+  favorites = [],
   onSearch = () => {},
   onLoginClick = () => {},
   onLogoutClick = () => {},
-  onMyPurchasesClick = () => {},
+  onCartClick = () => {},
   onCategorySelect = () => {}
 }) {
   const [selectedTab, setSelectedTab] = useState('all')
@@ -31,11 +33,9 @@ export default function MyPurchasesPage({
         isLoggedIn={isLoggedIn}
         onLoginClick={onLoginClick}
         onLogoutClick={onLogoutClick}
-        cartCount={0}
-        onCartClick={() => {}}
-        favoritesCount={0}
-        onFavoritesClick={() => {}}
-        onMyPurchasesClick={onMyPurchasesClick}
+        cartCount={cart.length}
+        onCartClick={onCartClick}
+        favoritesCount={favorites.length}
         onCategorySelect={onCategorySelect}
       />
 
@@ -203,7 +203,7 @@ export default function MyPurchasesPage({
         </div>
       </main>
 
-      <Footer />
+      <Footer onCategorySelect={onCategorySelect} />
     </div>
   )
 }

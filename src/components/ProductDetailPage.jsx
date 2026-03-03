@@ -64,19 +64,17 @@ const ProductDetailPage = ({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Navigation */}
-      <div className="bg-white border-b sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      {/* Breadcrumb de navegación */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center gap-2 text-sm text-gray-500">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center text-blue-600 hover:text-blue-800 transition"
+            className="hover:text-ml-blue transition"
           >
-            <span className="mr-2">←</span>
-            Volver
+            Inicio
           </button>
-          <h1 className="text-lg font-bold text-gray-800 flex-1 ml-4 truncate">
-            {product.name}
-          </h1>
+          <span>/</span>
+          <span className="text-gray-900 truncate max-w-xs">{product.name}</span>
         </div>
       </div>
 

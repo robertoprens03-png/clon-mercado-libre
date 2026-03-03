@@ -121,6 +121,9 @@ export const getProductDetails = async (productId) => {
       reviewsCount: data.rating?.count || 0,
       freeShipping: Math.random() > 0.5,
       source: 'fakestore',
+      available: Math.floor(Math.random() * 50) + 5,
+      soldQuantity: Math.floor(Math.random() * 200) + 10,
+      condition: 'new',
     };
   } catch (error) {
     console.error('Error obteniendo detalles del producto:', error);

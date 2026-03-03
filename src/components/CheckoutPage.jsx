@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export default function CheckoutPage({ cart, onRemoveFromCart }) {
+export default function CheckoutPage({ cart, onRemoveFromCart, onPurchase }) {
   const [shippingMethod, setShippingMethod] = useState('standard')
   const [paymentMethod, setPaymentMethod] = useState('card')
+  const [purchased, setPurchased] = useState(false)
+  const navigate = useNavigate()
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-CO', {
@@ -29,12 +32,42 @@ export default function CheckoutPage({ cart, onRemoveFromCart }) {
     same_day: 'Hoy',
   }
 
+  if (purchased) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+        <div className="text-6xl mb-4">🎉</div>
+        <h2 className="text-2xl font-bold text-ml-blue mb-2">¡Compra confirmada!</h2>
+        <p className="text-gray-600 mb-6">Tu pedido fue registrado. Podés seguirlo en <strong>Mis compras</strong>.</p>
+        <div className="flex gap-4 justify-center">
+          <button
+            onClick={() => navigate('/mis-compras')}
+            className="bg-ml-blue text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+          >
+            Ver mis compras
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="border-2 border-ml-blue text-ml-blue font-bold px-6 py-3 rounded-lg hover:bg-ml-gray transition"
+          >
+            Seguir comprando
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   if (cart.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <div className="text-6xl mb-4">🛒</div>
-        <h2 className="text-2xl font-bold text-ml-blue mb-2">Carrito vacío</h2>
-        <p className="text-gray-600">Agrega productos para proceder con la compra</p>
+        <h2 className="text-2xl font-bold text-ml-blue mb-2">Carrito vacio</h2>
+        <p className="text-gray-600 mb-6">Agrega productos para proceder con la compra</p>
+        <button
+          onClick={() => navigate('/')}
+          className="bg-ml-blue text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+        >
+          Ir a comprar
+        </button>
       </div>
     )
   }
@@ -208,14 +241,17 @@ export default function CheckoutPage({ cart, onRemoveFromCart }) {
 
             <button
               className="w-full bg-ml-blue text-ml-yellow font-bold py-3 rounded hover:bg-blue-900 transition text-lg"
-              onClick={() => alert(`Compra por ${formatPrice(total)} confirmada! Pronto implementaremos el pago en línea.`)}
+              onClick={() => {
+                if (onPurchase) onPurchase()
+                setPurchased(true)
+              }}
             >
-              Proceder al Pago
+              Confirmar compra
             </button>
 
             <button
               className="w-full border-2 border-ml-blue text-ml-blue font-bold py-2 rounded hover:bg-ml-gray transition"
-              onClick={() => window.location.reload()}
+              onClick={() => navigate('/')}
             >
               Seguir Comprando
             </button>
